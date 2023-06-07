@@ -1,6 +1,6 @@
 # Lifting SuRun from Subversion
 
-Most VCS conversions are horrible, `reposurgeon` addresses this. This project is an attempt of lifting SuRun from its Subversion repo all the while keeping the most important aspects of its history.
+Most VCS conversions are horrible, [`reposurgeon` addresses this](http://www.catb.org/esr/reposurgeon/repository-editing.html). This project is an attempt of lifting SuRun from its Subversion repo all the while keeping the most important aspects of its history.
 
 PS: this also is a small-scale demo of `reposurgeon`, which these days has been rewritten in Go, but when I last dabbled with it was written in Python.
 
