@@ -1,0 +1,136 @@
+read svnrepo
+lint
+# Authors seen in the commits
+authors read <<EOF
+kbruns = Kay Bruns <kay@example.net>
+Kay = Kay Bruns <kay@example.net>
+EOF
+# TBD: should we?
+#gitify
+# SuRun isn't really a branch name, but reposurgeon detects it as such
+branch rename refs/heads/SuRun refs/heads/main
+# Get rid of the import libs
+1..$ expunge /[.]Lib$/
+# The file to set DLL characteristics isn't needed
+1..$ expunge /[.]exe$/
+# Old crud
+1..$ expunge /[.]vspscc$/
+# Probably was a mistake anyway
+1..$ expunge /[.]pdf$/
+# Remove old VC6 projects and make files
+1..$ expunge /[.]ds[pw]$/
+1..$ expunge /[.]mak$/
+1..$ expunge /[.]dep$/
+# Prettify the file names a little
+1..$ path rename SuRunExt/SuRunExt.Def SuRunExt/SuRunExt.def
+1..$ path rename SuRunExt/SuRunExt32.Def SuRunExt/SuRunExt32.def
+1..$ path rename DBGTrace.H DbgTrace.h
+1..$ path rename DBGTrace.cpp DbgTrace.cpp
+1..$ path rename ReadMe.txt README.txt
+1..$ path rename BLOWFISH.h blowfish.h
+1..$ path rename /DOKU/ Doku
+1..$ path rename /DOKU\/(.+)/ Doku/\1
+# Remove the empty commits by squashing them
+/^emptycommit-\d+/n squash --delete --empty-only
+# Releases
+tag create v1.2.0.7                     <2009-09-10T18:35:03Z>
+tag create v1.2.0.8                     <2009-09-23T18:49:41Z>
+tag create v1.2.0.9                     <2010-12-23T08:58:54Z>
+tag create v1.2.1.0                     <2012-01-11T13:42:53Z>
+tag create v1.2.1.1-original            <2015-02-15T20:25:01Z>
+tag create v1.2.1.1-final               <2015-02-15T20:46:02Z>
+tag create v1.2.1.2                     <2015-08-09T10:24:13Z>
+tag create v1.2.1.3                     <2019-01-28T18:14:08Z>
+tag create v1.2.1.4-original            <2019-09-24T02:33:15Z>
+tag create v1.2.1.4-final               <2020-09-24T07:08:28Z>
+tag create v1.2.1.5                     <2021-10-04T18:26:50Z>
+# Releases in respective namespace
+tag create release/v1.2.0.7             <2009-09-10T18:35:03Z>
+tag create release/v1.2.0.8             <2009-09-23T18:49:41Z>
+tag create release/v1.2.0.9             <2010-12-23T08:58:54Z>
+tag create release/v1.2.1.0             <2012-01-11T13:42:53Z>
+tag create release/v1.2.1.1             <2015-02-15T20:46:02Z> # only final version gets a tag
+tag create release/v1.2.1.2             <2015-08-09T10:24:13Z>
+tag create release/v1.2.1.3             <2019-01-28T18:14:08Z>
+tag create release/v1.2.1.4             <2020-09-24T07:08:28Z> # only final version gets a tag
+tag create release/v1.2.1.5             <2021-10-04T18:26:50Z>
+# Candidates
+tag create candidate/v1.2.0.7-rc2       <2009-09-09T05:55:47Z>
+tag create candidate/v1.2.0.9-rc2       <2010-12-09T18:59:50Z>
+tag create candidate/v1.2.0.9-rc3       <2010-12-22T11:56:58Z>
+tag create candidate/v1.2.1.0-rc1       <2011-12-14T10:06:23Z>
+tag create candidate/v1.2.1.0-rc3       <2011-12-19T08:11:52Z>
+tag create candidate/v1.2.1.0-rc4       <2011-12-22T08:34:27Z>
+tag create candidate/v1.2.1.0-rc6       <2011-12-29T05:13:04Z>
+tag create candidate/v1.2.1.3-rc1       <2017-10-23T21:03:32Z>
+# Prereleases
+tag create prerelease/v1.2.0.8-beta-1   <2009-09-21T20:15:19Z>
+tag create prerelease/v1.2.0.8-beta-1.1 <2009-09-22T06:48:07Z>
+tag create prerelease/v1.2.0.9-beta-1   <2009-10-03T15:38:24Z>
+tag create prerelease/v1.2.0.9-beta-1.1 <2009-10-03T16:00:27Z>
+tag create prerelease/v1.2.0.9-beta-2   <2009-10-04T13:41:39Z>
+tag create prerelease/v1.2.0.9-beta-3   <2009-10-06T08:29:23Z>
+tag create prerelease/v1.2.0.9-beta-3.1 <2009-10-06T08:30:46Z>
+tag create prerelease/v1.2.0.9-beta-3.2 <2009-10-06T08:44:35Z>
+tag create prerelease/v1.2.0.9-beta-4   <2009-10-08T08:20:15Z>
+tag create prerelease/v1.2.0.9-beta-5   <2009-10-08T17:15:56Z>
+tag create prerelease/v1.2.0.9-beta-5.1 <2009-10-08T19:23:24Z>
+tag create prerelease/v1.2.0.9-beta-6   <2009-10-12T15:00:12Z>
+tag create prerelease/v1.2.0.9-beta-7   <2009-10-18T18:15:49Z>
+tag create prerelease/v1.2.0.9-beta-7.1 <2009-10-27T03:54:12Z>
+tag create prerelease/v1.2.0.9-beta-8   <2009-11-23T21:07:04Z>
+tag create prerelease/v1.2.0.9-beta-9   <2010-01-07T20:25:37Z>
+tag create prerelease/v1.2.0.9-beta-11  <2010-06-28T14:24:07Z>
+tag create prerelease/v1.2.0.9-beta-12  <2010-06-30T08:45:36Z>
+tag create prerelease/v1.2.0.9-beta-13  <2010-08-01T09:20:47Z>
+tag create prerelease/v1.2.0.9-beta-14  <2010-08-10T10:27:44Z>
+tag create prerelease/v1.2.1.0-beta-1   <2011-01-30T22:24:29Z>
+tag create prerelease/v1.2.1.0-beta-1.1 <2011-02-01T20:34:12Z>
+tag create prerelease/v1.2.1.0-beta-2   <2011-02-15T18:36:59Z>
+tag create prerelease/v1.2.1.0-beta-2.1 <2011-02-15T20:58:54Z>
+tag create prerelease/v1.2.1.0-beta-3   <2011-02-17T14:41:45Z>
+tag create prerelease/v1.2.1.0-beta-3.1 <2011-02-24T09:13:34Z>
+tag create prerelease/v1.2.1.0-beta-5   <2011-03-17T10:52:24Z>
+tag create prerelease/v1.2.1.0-beta-6   <2011-05-03T08:29:06Z>
+tag create prerelease/v1.2.1.0-beta-7   <2011-06-02T07:59:38Z>
+tag create prerelease/v1.2.1.0-beta-8   <2011-06-24T12:39:49Z>
+tag create prerelease/v1.2.1.0-beta-9   <2011-07-04T13:21:46Z>
+tag create prerelease/v1.2.1.0-beta-9.1 <2011-07-06T11:25:53Z>
+tag create prerelease/v1.2.1.1-beta-1   <2012-07-03T07:11:04Z>
+tag create prerelease/v1.2.1.1-beta-2   <2012-11-12T18:46:11Z>
+tag create prerelease/v1.2.1.1-beta-3   <2012-11-19T18:13:32Z>
+tag create prerelease/v1.2.1.1-beta-4   <2012-11-27T07:58:21Z>
+tag create prerelease/v1.2.1.1-beta-5   <2012-12-12T15:46:13Z>
+tag create prerelease/v1.2.1.1-beta-7   <2013-02-24T19:18:21Z>
+tag create prerelease/v1.2.1.1-beta-8   <2013-06-04T12:12:05Z>
+tag create prerelease/v1.2.1.1-beta-8.1 <2013-09-03T06:52:43Z>
+tag create prerelease/v1.2.1.1-beta-8.2 <2013-09-03T19:42:21Z>
+tag create prerelease/v1.2.1.3-beta-1   <2017-03-11T14:11:51Z>
+tag create prerelease/v1.2.1.3-beta-1.1 <2017-08-09T18:47:20Z>
+tag create prerelease/v1.2.1.3-beta-2   <2017-08-09T19:42:48Z>
+tag create prerelease/v1.2.1.3-beta-3   <2017-08-20T06:59:48Z>
+tag create prerelease/v1.2.1.3-beta-4   <2017-10-09T17:51:53Z>
+tag create prerelease/v1.2.1.4-beta-1   <2019-05-11T12:01:26Z>
+# Deduplicate blobs
+1..$ dedup
+# Mark the occasion
+tag create last-revision-before-git @max(=C)
+msgin <<EOF
+Tag-Name: last-revision-before-git
+Tagger: Oliver Schneider <oliver@assarbad.net>
+
+This is the last SVN commit before conversion
+EOF
+# We're converting to Git
+prefer git
+# Write the Git repo and fast-import stream
+rebuild surun-git
+write >surun.fi
+# Get some info from the newly created repo
+shell git -C surun-git log --pretty=format: --name-only --diff-filter=A | sort -u | tee files.txt
+shell git -C surun-git log --name-only --pretty=format: | sort | uniq -c | sort -nr | grep '\.png$' | awk '$1 ~ /1/ {$1=""; print}' | sed 's|^\s*||g' | tee single-commit-png-files.txt
+# Write some stats
+index >index.txt
+list >commits.txt
+sizes
+stats

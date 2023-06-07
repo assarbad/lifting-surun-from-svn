@@ -1,0 +1,7 @@
+surun.svndump
+svnrepo/
+surun-git/
+pngs/
+*.fi
+*.tgz
+*.txt
