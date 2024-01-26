@@ -1,4 +1,4 @@
-read svnrepo
+read surun.svn
 lint
 # Authors seen in the commits
 authors read <<EOF

@@ -14,7 +14,7 @@ clean:
 $(NAME): $(NAME).svn
 
 $(NAME).svn: $(NAME).svn/hooks/pre-revprop-change
-	svnsync initialize file:///$(PWD)/$@/ $(SVNURL)
+	-svnsync initialize file:///$(PWD)/$@/ $(SVNURL)
 
 $(NAME).svn/hooks/pre-revprop-change: $(NAME).svn/format
 	echo "#!/usr/bin/env bash" > $@
